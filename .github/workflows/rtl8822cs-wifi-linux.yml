@@ -2,7 +2,8 @@ name: Build rtl8822cs-wifi-linux
 
 env: 
   filePath: linux-rtl8822cs-wifi
-
+  mkd: rtl8822cs
+  platform: arm64
 
 on:
   push:
@@ -18,15 +19,18 @@ jobs:
     - uses: actions/checkout@v3
     - name: configure
       run: 
+        echo 设置环境变量
         export CONFIG_WIRELESS=y
         export CONFIG_CFG80211=y
         export CONFIG_MAC80211=y
         export CONFIG_CFG80211_WEXT=y
 
-        echo wireless drivers
+        echo 设置配置无线网的环境变量
         export CONFIG_WLAN=y
     - name: make
       run: 
-        echo build rtl8822cs filePath=$filePath
-        cd rtl8822cs && make ARCH=arm64 -C $filePath CONFIG_RTL8822CS=m
+        echo 构建rtl8822cs，文件路径：$filePath
+        rm -rf $mkd
+        mkdir $mkd
+        cd $mkd && make ARCH=$platform -C $filePath -M$(filePath)/$(mkd) $ CONFIG_RTL8822CS=m
         
