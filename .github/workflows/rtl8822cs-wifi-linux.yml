@@ -27,9 +27,9 @@ jobs:
         filePath: linux-rtl8822cs-wifi
         mkd: rtl8822cs
         platform: arm64
-      run: 
+      run: |
         echo 构建rtl8822cs，文件路径：$filePath
-        rm -rf $(mkd)
-        mkdir $(mkd)
+        rm -rf $(mkd) &&
+        mkdir $(mkd) &&
         cd $(mkd) && make ARCH=$(platform) -C $(filePath) -m $(filePath)/$(mkd) $ CONFIG_RTL8822CS=m
         
