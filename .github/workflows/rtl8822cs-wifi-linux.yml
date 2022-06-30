@@ -17,7 +17,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: configure
-      run: ./configure
+      run: 
         export CONFIG_WIRELESS=y
         export CONFIG_CFG80211=y
         export CONFIG_MAC80211=y
