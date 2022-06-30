@@ -1,5 +1,9 @@
 name: Build rtl8822cs-wifi-linux
 
+env: 
+  filePath: linux-rtl8822cs-wifi
+
+
 on:
   push:
     branches: [ "master" ]
@@ -19,10 +23,10 @@ jobs:
         export CONFIG_MAC80211=y
         export CONFIG_CFG80211_WEXT=y
 
-        echo 'wireless drivers'
+        echo wireless drivers
         export CONFIG_WLAN=y
     - name: make
       run: 
-        echo 'build rtl8822cs'
-        cd rtl8822cs && make ARCH=arm64 -C "/path/to/linux" M="/path/to/rtl8822cs" CONFIG_RTL8822CS=m
+        echo build rtl8822cs filePath=$filePath
+        cd rtl8822cs && make ARCH=arm64 -C $filePath CONFIG_RTL8822CS=m
         
