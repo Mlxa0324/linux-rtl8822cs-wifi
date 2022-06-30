@@ -30,7 +30,7 @@ jobs:
     - name: make
       run: 
         echo 构建rtl8822cs，文件路径：$filePath
-        rm -rf $env.mkd
-        mkdir $env.mkd
-        cd $env.mkd && make ARCH=$env.platform -C $filePath -M$(env.filePath)/$(env.mkd) $ CONFIG_RTL8822CS=m
+        rm -rf $(mkd)
+        mkdir $(mkd)
+        cd $(mkd) && make ARCH=$(platform) -C $(filePath) -m $(filePath)/$(mkd) $ CONFIG_RTL8822CS=m
         
