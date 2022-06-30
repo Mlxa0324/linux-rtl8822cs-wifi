@@ -1,0 +1,28 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: configure
+      run: ./configure
+        export CONFIG_WIRELESS=y
+        export CONFIG_CFG80211=y
+        export CONFIG_MAC80211=y
+        export CONFIG_CFG80211_WEXT=y
+
+        echo 'wireless drivers'
+        export CONFIG_WLAN=y
+    - name: make
+      run: 
+        echo 'build rtl8822cs'
+        cd rtl8822cs && make ARCH=arm64 -C "/path/to/linux" M="/path/to/rtl8822cs" CONFIG_RTL8822CS=m
+        
